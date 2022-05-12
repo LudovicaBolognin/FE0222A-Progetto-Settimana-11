@@ -10,11 +10,16 @@ import { CartService } from 'src/app/service/cart.service';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent implements OnInit {
+  product: Product | undefined;
 
   constructor(private srvProduct: ProdoctService, private srvCart: CartService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+// da inserire funzione per aggiungere al carrello
 
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const id = +params['id'];
+    })
   }
 
 }

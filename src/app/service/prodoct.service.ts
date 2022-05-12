@@ -8,21 +8,21 @@ import { catchError, throwError } from 'rxjs';
 })
 export class ProdoctService {
 
-  urlDatabase = "http://localhost:4201/products"
+  urlDatabase = "http://localhost:4201/products" // togliere products???
 
   constructor(private http: HttpClient) { }
 
 // get all the data from db.json
   getProductList() {
     return this.http.get<Product[]>(this.urlDatabase).pipe(catchError(error => {
-      return throwError(error); //aggiungere gestione dell'errore
+      return throwError(error); // da aggiungere gestione dell'errore (forse :D )
     }));
   };
 
 // get the specific product from db.json
   getProduct(id: number) {
     return this.http.get<Product>(`${this.urlDatabase}/${id}`).pipe(catchError(error => {
-      return throwError(error);//aggiungere gestione dell'errore
+      return throwError(error);// da aggiungere gestione dell'errore
     }));
   };
 
