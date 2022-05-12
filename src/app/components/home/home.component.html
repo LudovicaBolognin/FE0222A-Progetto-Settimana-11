@@ -1,0 +1,25 @@
+<!-- <p>home works!</p> -->
+<div class="container mt-5 m-auto p-5">
+  <div class="row m-auto mb-5 pb-3">
+    <h1 class="display-2 text-center">Lista Prodotti</h1>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let product of products" class="col">
+      <div class="card h-100 border-dark mb-3">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+          <h5 class="card-title">Prodotto: {{product.name | titlecase | uppercase}}</h5>
+          <p *ngIf="product.description; else noDescription" class="card-text"><i>Descrizione articolo:</i> {{product.description}}.</p>
+          <ng-template #noDescription>
+            <div class="alert alert-danger" role="alert">
+              Descrizione non disponibile.
+            </div>
+          </ng-template>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Prodotto Disponibile</small><button type="button" class="btn btn-dark float-end" [routerLink]="[product.id]">Dettagli</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
