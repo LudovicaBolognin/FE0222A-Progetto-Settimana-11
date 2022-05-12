@@ -17,9 +17,14 @@ export class DetailsComponent implements OnInit {
 // da inserire funzione per aggiungere al carrello
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(async (params) => {
       const id = +params['id'];
-    })
+      this.product = await this.srvProduct.getProduct(id).toPromise(); // Però è deprecato --> Trova un altro metodo
+    });
+  }
+
+  addProd() {
+    this.srvCart.addToCart(this.product as Product); // cast se no undefined
   }
 
 }
