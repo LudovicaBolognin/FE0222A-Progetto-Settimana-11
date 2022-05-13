@@ -32,18 +32,16 @@ export class CartComponent implements OnInit {
   }
 
   completeOrder(): void {
-    if(!this.form.valid) {
+    /* if(!this.form.valid) {
       alert('Form non valido: compila tutti i campi');
     } else {
       alert('Il tuo ordine è andato a buon fine!');
-    }
+    } */
     console.log(this.form.controls['name'].value);
     this.srvCart.emptyCart();
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.sub.unsubscribe();
   }
 

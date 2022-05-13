@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 })
 export class CartService {
 
-  private cart: Product[] = [];
+  cart: Product[] = [];
 
   // subject to update cart items
   subject = new Subject<number>();
