@@ -2,27 +2,28 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Route } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { CartComponent } from './components/cart/cart.component';
 import { DetailsComponent } from './components/details/details.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ErrorInterceptor } from './error.interceptor';
 
 const routes: Route[] = [
-  {
-    path: 'home', //products' list
-    component: HomeComponent
-  },
-  {
-    path: 'home/:id', // product's details
-    component: DetailsComponent
-  },
   {
     path: 'cart',
     component: CartComponent
   },
+  {
+    path: '', //products' list
+    component: HomeComponent
+  },
+  {
+    path: ':id', // product's details
+    component: DetailsComponent
+  }
+
 ]
 
 @NgModule({
@@ -30,8 +31,8 @@ const routes: Route[] = [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CartComponent,
-    DetailsComponent
+    DetailsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,13 @@ const routes: Route[] = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

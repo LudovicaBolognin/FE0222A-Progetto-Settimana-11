@@ -1,2 +1,42 @@
-<p>cart works!</p>
-<h2 *ngIf="">Carrello Vuoto</h2>
+<!-- <p>cart works!</p> -->
+<div class="container mt-5 pt-3">
+  <div class="row m-auto mb-5 pb-3">
+    <h1 class="display-2 text-center">Il tuo Carrello</h1>
+  </div>
+  <div class="row">
+    <div class="col-md">
+      <ng-container *ngIf="cart && cart.length > 0; else noCart">
+       <div class="row w-75 m-auto">
+         <h1 class="display-6 text-center">Articoli presenti nel tuo carrello:</h1>
+         <ul class="list-group mt-5 m-auto">
+          <li *ngFor="let product of cart" class="list-group-item list-group-item-action list-group-item-secondary">{{product.name}} <strong class="float-end">{{product.price | currency: '€'}}</strong></li>
+        </ul>
+       </div>
+       <h5 class="display-6 text-center">Inserisci i tuoi dati per completare l'acquisto:</h5>
+       <form action="" [formGroup]="form">
+        <div class="mb-3">
+        <label for="name" class="form-label">Inserisci il tuo nome</label>
+         <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Inserisci il tuo indirizzo</label>
+           <input type="text" name="address" id="address" class="form-control" required>
+          </div>
+        <button class="btn btn-primary" (ngSubmit)="completeOrder()">Completa l'acquisto!</button>
+       </form>
+
+
+
+      </ng-container>
+
+    </div>
+    </div>
+
+    <ng-template #noCart>
+      <div class="alert alert-danger w-50 m-auto" role="alert">
+        Non ci sono articoli nel tuo carrello.
+      </div>
+    </ng-template>
+
+</div>
+

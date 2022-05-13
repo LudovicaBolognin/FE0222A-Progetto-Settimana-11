@@ -7,28 +7,26 @@ import { Subject } from 'rxjs';
 })
 export class CartService {
 
-cart: Product[] = [];
+  private cart: Product[] = [];
 
-sbj = new Subject<number>();
+  // subject to update cart items
+  subject = new Subject<number>();
 
   constructor() { }
 
-  //select the product to add to my cart
+  //select the product to add it to my cart
   addToCart(product: Product) {
-    console.log(this.cart);
-    this.cart = [...this.cart, product]; // passa il prodotto
-    //sent to all components
-    this.sbj.next(this.cart.length); // da controllare <___<
-    console.log(this.cart);
+    this.cart = [...this.cart, product];
+    this.subject.next(this.cart.length);
   }
 
   finalCart() {
     return this.cart;
   }
 
-  //empty the cart and reset the messsage of the subject to cart.lenght=0
+  //empty the cart and reset the messsage of the subject to 0
   emptyCart() {
     this.cart = [];
-    this.sbj.next(0);
+    this.subject.next(0);
   }
 }

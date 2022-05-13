@@ -10,7 +10,7 @@
           <a class="nav-link active" aria-current="page" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home - Prodotti</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/cart']" routerLinkActive="active">Carrello (0)</a>
+          <a class="nav-link" [routerLink]="['/cart']" routerLinkActive="active">Carrello ({{totalProducts}})</a>
           <!-- Inserire il numero di prodotti all'interno del carrello -->
         </li>
       </ul>

@@ -1,22 +1,28 @@
-<p>details works!</p>
+<!-- <p>details works!</p> -->
 <!-- <div class="container mt-5 m-auto">
   <h3 class="display-6">Dettagli Prodotto</h3>
 </div> -->
-<div  class="modal" tabindex="-1">
+<div *ngIf="productDetail" class="mt-5 m-auto">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Dettagli Prodotto</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" [routerLink]="['/']"></button>
       </div>
       <div class="modal-body">
-        <h5>{{productDetail.name}}</h5>
-        <!-- <p>Modal body text goes here.</p> -->
+        <h5>{{productDetail?.name}}</h5>
+        <p *ngIf="productDetail.description; else noDescription">{{productDetail?.description}}</p>
+        <ng-template #noDescription>
+          <div class="alert alert-danger" role="alert">
+            Descrizione non disponibile.
+          </div>
+        </ng-template>
+        <span class="float-end">Prezzo: {{productDetail?.price | currency: '€'}}</span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/']">Chiudi</button>
         <!-- Ricordati di fare la funzione x chiudere -->
-        <button type="button" class="btn btn-primary">Aggiungi al Carrello</button>
+        <button type="button" class="btn btn-primary" (click)="addProd()">Aggiungi al Carrello</button>
       </div>
     </div>
   </div>

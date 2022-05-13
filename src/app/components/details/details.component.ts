@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/interface/product';
 import { ProdoctService } from 'src/app/service/prodoct.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CartService } from 'src/app/service/cart.service';
 import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-details',
@@ -20,9 +20,10 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.router.params.subscribe((params: Params) => {
+ //add the product id param to the route params
+    this.sub = this.router.params.subscribe((params: Params) => {
       const id = +params['id'];
-      this.getprod(id);
+      this.selectProd(id);
       console.log(this.productDetail);
     });
      /* this.route.params.subscribe( async (params) => {
@@ -33,17 +34,18 @@ export class DetailsComponent implements OnInit {
     console.log(this.productDetail); */
   }
 
-  getprod(id: number) {
+// get the selected product (by id) from service
+  selectProd(id: number) {
     this.srvProduct.getProduct(id).subscribe(prod => {
       this.productDetail = prod;
       console.log(this.productDetail);
-      console.log(prod);
     });
 
   }
 
   addProd() {
-    this.srvCart.addToCart(this.productDetail as Product); // cast se no undefined
+    this.srvCart.addToCart(this.productDetail as Product); // cast or undefined
+    console.log(this.productDetail);
   }
 
 }

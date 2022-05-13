@@ -8,7 +8,7 @@
       <div class="card h-100 border-dark mb-3">
         <!-- <img src="..." class="card-img-top" alt="..."> -->
         <div class="card-body">
-          <h5 class="card-title">Prodotto: {{product.name | titlecase | uppercase}}</h5>
+          <h5 class="card-title">Prodotto: {{product.name | uppercase}}</h5>
           <p *ngIf="product.description; else noDescription" class="card-text"><i>Descrizione articolo:</i> {{product.description}}.</p>
           <ng-template #noDescription>
             <div class="alert alert-danger" role="alert">
@@ -17,7 +17,7 @@
           </ng-template>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Prodotto Disponibile</small><button type="button" class="btn btn-dark float-end" [routerLink]="['/home',product.id]" routerLinkActive="active">Dettagli</button>
+          <small class="text-muted">Prodotto Disponibile</small><button type="button" class="btn btn-dark float-end" [routerLink]="['/',product.id]" routerLinkActive="active">Dettagli</button>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class ProdoctService {
 
   urlDatabase = "http://localhost:4201" // togliere products???
+ /* arrayProd: Product[] = []; */
 
   constructor(private http: HttpClient) { }
 
