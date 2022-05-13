@@ -15,20 +15,28 @@ export class CartComponent implements OnInit {
   sub!: Subscription;
   form!: FormGroup;
 
-  constructor(private srvCart: CartService, public fb: FormBuilder) {
-    this.form = fb.group({
-      'name': ['', Validators.required],
-      'address': ['', Validators.required]
-    });
-   }
+  constructor(private srvCart: CartService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
     this.cart = this.srvCart.finalCart();
     this.sub = this.srvCart.subject.subscribe((total) => {
       if (total == 0) {
         this.cart = undefined;
       }
     });
+
+    // form control
+    this.form = this.fb.group({
+      infoClient: this.fb.group({
+        name: this.fb.control(null, [Validators.required]),
+        address: this.fb.control(null, [Validators.required]),
+        email: this.fb.control(null, [Validators.required, Validators.email])
+      }),
+
+    });
+
+
   }
 
   completeOrder(): void {

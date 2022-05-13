@@ -13,15 +13,22 @@
         </ul>
        </div>
        <h5 class="display-6 text-center">Inserisci i tuoi dati per completare l'acquisto:</h5>
-       <form action="" [formGroup]="form">
-        <div class="mb-3">
-        <label for="name" class="form-label">Inserisci il tuo nome</label>
-         <input type="text" name="name" id="name" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label for="address" class="form-label">Inserisci il tuo indirizzo</label>
-           <input type="text" name="address" id="address" class="form-control" required>
+
+       <form [formGroup]="form">
+        <div formGroupName="infoClient">
+          <div class="mb-3 form-group">
+          <label for="name" class="form-label">Inserisci il tuo nome</label>
+           <input formControlName="name" type="text" name="name" id="name" class="form-control" required [pattern]="'A-Za-z'">
           </div>
+          <div class="mb-3 form-group">
+            <label for="address" class="form-label">Inserisci il tuo indirizzo</label>
+             <input formControlName="address" type="text" name="address" id="address" class="form-control" required>
+            </div>
+            <div class="mb-3 form-group">
+              <label for="email" class="form-label">Inserisci il tuo indirizzo e-mail</label>
+               <input formControlName="email" type="email" name="email" id="email" class="form-control" required>
+              </div>
+        </div>
         <button class="btn btn-primary" (click)="completeOrder()">Completa l'acquisto!</button>
        </form>
 
