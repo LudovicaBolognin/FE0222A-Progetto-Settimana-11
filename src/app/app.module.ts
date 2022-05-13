@@ -12,11 +12,11 @@ import { DetailsComponent } from './components/details/details.component';
 
 const routes: Route[] = [
   {
-    path: '', //products' list
+    path: 'home', //products' list
     component: HomeComponent
   },
   {
-    path: ':id', // product's details
+    path: 'home/:id', // product's details
     component: DetailsComponent
   },
   {

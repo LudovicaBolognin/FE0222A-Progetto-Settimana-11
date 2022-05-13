@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   products: Product[] | undefined;
   sub!: Subscription;
-  @Input() product!: Product;
+  /* @Input() product!: Product; */
 
   constructor(private srvProduct: ProdoctService) { }
 
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.sub = this.srvProduct.getProductList().subscribe((productsData) => {
       this.products = productsData;
       console.log(this.products);
-      console.log(this.products[0].id);
+      /* console.log(this.products[0].id); */
     });
   }
 
