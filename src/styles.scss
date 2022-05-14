@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/scss/bootstrap";
+body {
+  background: url('assets/img/45degreee_fabric.webp');
+}
+
+div.card, div.modal-dialog {
+  box-shadow: 2px 2px 3px 3px rgb(159, 149, 135);
+  border-radius: 10px;
+}
+
