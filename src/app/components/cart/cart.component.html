@@ -14,38 +14,28 @@
        </div>
        <h5 class="display-6 text-center">Inserisci i tuoi dati per completare l'acquisto:</h5>
 
-       <!--Form-->
-       <form [formGroup]="form" #myForm>
-        <div formGroupName="infoClient">
+       <!--Template Driven Form-->
+       <form #form="ngForm" (ngSubmit)="submitForm(form)">
+
           <div class="mb-3 form-group">
           <label for="name" class="form-label">Inserisci il tuo nome</label>
-           <input formControlName="name" type="text" name="name" id="name" class="form-control" required [pattern]="'A-Za-z'">
-           <div *ngIf="invalidInput('infoClient.name')?.invalid && invalidInput('infoClient.name')?.touched">
-            <ng-container *ngIf="errorsInput('infoClient.name', 'required')">
-              <div class="alert alert-danger" role="alert">Il campo è vuoto.</div>
-            </ng-container>
+           <input type="text" name="name" id="name" class="form-control" required pattern="[A-Za-z]*" ngModel #name="ngModel">
+            <div *ngIf="name.invalid && name.touched" class="alert alert-danger" role="alert">Il campo è vuoto.</div>
           </div>
-          </div>
+
           <div class="mb-3 form-group">
             <label for="address" class="form-label">Inserisci il tuo indirizzo</label>
-             <input formControlName="address" type="text" name="address" id="address" class="form-control" required>
-             <div *ngIf="invalidInput('infoClient.address')?.invalid && invalidInput('infoClient.address')?.touched">
-              <ng-container *ngIf="errorsInput('infoClient.address', 'required')">
-                <div class="alert alert-danger" role="alert">Il campo è vuoto.</div>
-              </ng-container>
+             <input type="text" name="address" id="address" class="form-control" required ngModel #address="ngModel">
+              <div *ngIf="address.invalid && address.touched" class="alert alert-danger" role="alert">Il campo è vuoto.</div>
             </div>
-            </div>
+
             <div class="mb-3 form-group">
               <label for="email" class="form-label">Inserisci il tuo indirizzo e-mail</label>
-              <input formControlName="email" type="email" name="email" id="email" class="form-control" required>
-              <div *ngIf="invalidInput('infoClient.email')?.invalid && invalidInput('infoClient.email')?.touched">
-                <ng-container *ngIf="errorsInput('infoClient.email', 'required')">
-                  <div class="alert alert-danger" role="alert">Il campo è vuoto.</div>
-                </ng-container>
-              </div>
+              <input type="email" name="email" id="email" class="form-control" required email ngModel #email="ngModel" >
+              <div *ngIf="email.invalid && email.touched" class="alert alert-danger" role="alert">Il campo è vuoto.</div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="completeOrder()">Completa l'acquisto!</button>
+
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary" (click)="completeOrder()">Completa l'acquisto!</button>
        </form>
       </ng-container>
 
