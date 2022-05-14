@@ -15,10 +15,13 @@ export class CartComponent implements OnInit {
   sub!: Subscription;
   form!: FormGroup;
 
+  // right after the cart is empty
+  endApp: number = 0;
+
   constructor(private srvCart: CartService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-
+    this.endApp = 0;
     this.cart = this.srvCart.finalCart();
     this.sub = this.srvCart.subject.subscribe((total) => {
       if (total == 0) {
@@ -32,21 +35,30 @@ export class CartComponent implements OnInit {
         name: this.fb.control(null, [Validators.required]),
         address: this.fb.control(null, [Validators.required]),
         email: this.fb.control(null, [Validators.required, Validators.email])
-      }),
-
+      })
     });
 
+    this.form.valueChanges.subscribe(value => {
+      console.log(value);
+    })
 
   }
 
+  // form invalidation: show in form properties
+errorsInput(keyprop: string, error: string) {
+  return this.form.get(keyprop)?.errors![error];
+}
+
+invalidInput(keyprop: string) {
+  return this.form.get(keyprop);
+}
+
+
+
+  // clear cart
   completeOrder(): void {
-    /* if(!this.form.valid) {
-      alert('Form non valido: compila tutti i campi');
-    } else {
-      alert('Il tuo ordine è andato a buon fine!');
-    } */
-    console.log(this.form.controls['name'].value);
     this.srvCart.emptyCart();
+    this.endApp++;
   }
 
   ngOnDestroy(): void {
