@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
 
   cart: Product[] | undefined;
   sub!: Subscription;
+  totalPrice: number = 0;
   /* form!: FormGroup; */
 
   // right after the cart is empty
@@ -28,6 +29,12 @@ export class CartComponent implements OnInit {
         this.cart = undefined;
       }
     });
+
+    // total price
+    for(let i=0; i < this.cart.length; i++) {
+      this.totalPrice += this.cart[i].price;
+    }
+
     // reactive form - form control
    /*  this.form = this.fb.group({
       infoClient: this.fb.group({

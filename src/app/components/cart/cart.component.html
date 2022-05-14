@@ -10,12 +10,13 @@
          <h1 class="display-6 text-center">Articoli presenti nel tuo carrello:</h1>
          <ul class="list-group mt-5 m-auto">
           <li *ngFor="let product of cart" class="list-group-item list-group-item-action list-group-item-secondary">{{product.name}} <strong class="float-end">{{product.price | currency: '€'}}</strong></li>
+        <li *ngIf="totalPrice" class="list-group-item list-group-item-action list-group-item-dark"><p class="float-end my-1"><i>Prezzo totale:</i> {{totalPrice | currency: '€'}}</p></li>
         </ul>
        </div>
-       <h5 class="display-6 text-center">Inserisci i tuoi dati per completare l'acquisto:</h5>
+       <h5 class="display-6 text-center mt-5">Inserisci i tuoi dati per completare l'acquisto:</h5>
 
        <!--Template Driven Form-->
-       <form #form="ngForm" (ngSubmit)="submitForm(form)">
+       <form #form="ngForm" (ngSubmit)="submitForm(form)" class="w-75 my-5 m-auto">
 
           <div class="mb-3 form-group">
           <label for="name" class="form-label">Inserisci il tuo nome</label>
@@ -41,7 +42,7 @@
 
  <!-- after completing an order-->
 <ng-container *ngIf="endApp > 0">
-        <div class="alert alert-dark w-50 m-auto" role="alert">Il tuo acquisto è andato a buon fine!</div>
+        <div class="alert alert-dark w-50 m-auto my-5" role="alert">Il tuo acquisto è andato a buon fine!</div>
 <div class="container w-50 m-auto mt-3">
   <button type="button" class="btn btn-primary" [routerLink]="'/'">Continua gli acquisti</button>
 </div>
@@ -50,7 +51,7 @@
     </div>
 
     <ng-template #noCart>
-      <div class="alert alert-danger w-50 m-auto" role="alert">
+      <div class="alert alert-danger w-50 m-auto my-5" role="alert">
         Non ci sono articoli nel tuo carrello.
       </div>
     </ng-template>
